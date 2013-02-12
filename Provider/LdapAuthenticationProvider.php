@@ -79,8 +79,15 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
                 throw $userNotFoundException;
             }
         } else {
+
+            $user = $this->userProvider
+                ->userEqualUsername($token->getUsername())
+                ;
+
+            /**
             $user = new LdapUser();
             $user->setUsername($token->getUsername());
+            */
         }
 
         if (null !== $this->dispatcher && $user instanceof LdapUser) {
